@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        body {
+            background: #333;
+            color: #ccc;
+           margin: 2em;
+           font-size: 1.5em;
+           font-family: 'Source Code Pro','Andale Mono',Monaco,'Courier New',monospace;
+        }
+        #timer {
+           font-weight: bold;
+           color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div>Time remaining: <span id="timer"></span></div>
+<button id="start" onclick="redirect()">End</button>
+<script>
+var interval = 5000;
+
+function reset() {
+    localStorage.endTime = +new Date + interval;
+}
+
+if(!localStorage.endTime) {
+    reset();
+} 
+function redirect() {
+    setTimeout(window.location.href = 'new.html', 1000);
+    localStorage.clear();
+}
+
+function start() {
+    var remaining = localStorage.endTime - new Date;
+    if( remaining > 0 ) {
+        document.getElementById('timer').innerText = Math.floor(remaining / 1000) + 1;
+    }
+    else{
+        document.getElementById('start').click();
+    }
+}
+
+setInterval(start, 100);
+ // document.getElementById("start").addEventListener("click", function(){
+ //     timer();
+ // });
+</script>
+</body>
+</html>
