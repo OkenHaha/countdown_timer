@@ -19,23 +19,26 @@
 
 <div>Time remaining: <span id="timer"></span></div>
 <button id="start" onclick="redirect()">End</button>
+
 <script>
 var interval = 5000;
 
 function reset() {
     localStorage.endTime = +new Date + interval;
+    //this creates a end time storage
+    localStorage.start = new Date;
 }
 
 if(!localStorage.endTime) {
-    reset();
+    reset(); //if there's no end time stored then call the function to create
 } 
 function redirect() {
     setTimeout(window.location.href = 'new.html', 1000);
     localStorage.clear();
 }
-
+var remaining;
 function start() {
-    var remaining = localStorage.endTime - new Date;
+    remaining = localStorage.endTime - new Date;
     if( remaining > 0 ) {
         document.getElementById('timer').innerText = Math.floor(remaining / 1000) + 1;
     }

@@ -1,7 +1,9 @@
 import { useState, useEffect  } from 'react'
-import './App.css'
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
 
-function App() {
+import './App.css'
+import Time from './pages/Time.jsx'
+/*function App() {
   const [date, setDate] = useState(new Date());
   
   function refreshClock() {
@@ -13,11 +15,31 @@ function App() {
       clearInterval(timerId);
     };
   }, []);
-  const d = date.toLocaleTimeString()
+
+  const show = () => {
+    const d = date.toLocaleTimeString()
+    return d;
+  }
   return (
     <div>
-    <h1>{d}</h1>
+    <button onClick={show}>CLick me</button>
+    <h1></h1>
     </div>
+  );
+}*/
+function App() {
+
+  return (
+    <Router>
+      <div className="App">
+      <button>
+        <Link to="/timer">Start Timer</Link>
+      </button>
+      <Routes>
+          <Route exact path="/timer" element={<Time/>}>Start Timer</Route>
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
