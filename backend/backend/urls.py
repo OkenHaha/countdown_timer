@@ -15,8 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from timer import views
+
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+
+router.register(r'timer', views.TimerView, 'timer')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('timer.urls')),
+    path('api/', include(router.urls))
 ]
