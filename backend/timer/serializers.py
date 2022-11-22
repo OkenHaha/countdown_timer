@@ -5,4 +5,4 @@ from .models import Timer
 class TimerSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Timer
-		fields = ('name', 'start_time', 'end_time')
+		fields = ('name', 'rt')

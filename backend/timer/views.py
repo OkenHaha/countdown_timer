@@ -1,34 +1,35 @@
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
-
+from rest_framework.views import APIView
 from .serializers import TimerSerializer
 from .models import Timer
 
-from datetime import datetime, timedelta
+# from datetime import datetime, timedelta
 
-#d = datetime.timedelta(days =-1, seconds = 68400)
-d = datetime.now()
+# d = datetime.timedelta(days =-1, seconds = 68400)
+# d = datetime.now()
 
-#dt = datetime.strptime(d, "%Y-%m-%d %H:%M:%S.%F")
-end_timer = d + timedelta(seconds=300)
-
-# obj = Timer.objects.create(duration = d)
-# obj.save()
-'''
-while True:
-    remaining = endTime - current Time
-    if remaining < 0:
-        break
-'''
-
-def setTime():
-    set_end = Timer.objects.create(name="oken",end_time=end_timer, start_time=d)
-    set_end.save()
+# #dt = datetime.strptime(d, "%Y-%m-%d %H:%M:%S.%F")
+# end_timer = d + timedelta(seconds=300)
 
 
-def cal():
-    endTimer = Timer.objects.get(end_time)
-    remaining = endTimer - d
+# def setTime():
+#     set_end = Timer.objects.create(name="oken",end_time=end_timer, start_time=d)
+#     set_end.save()
+
+# remaining = Timer.objects.create(rt=end_timer - d.strftime("%Y-%m-%d %H:%M:%S.%F"))
+# remaining.save()
+
+# def cal():
+#     endTimer = Timer.objects.get(end_time)
+#     remaining = Timer.objects.create(remain_time=endTimer - d)
+#     remaining.save()
+#     if remaining <= 0:
+#         #remaining = Timer.objects.get(remain_time)
+#         remaining.delete()
+
+# setV = Timer.objects.create(rt=20)
+# setV.save()
 
 class TimerView(viewsets.ModelViewSet):
     serializer_class = TimerSerializer
@@ -39,4 +40,6 @@ class TimerView(viewsets.ModelViewSet):
 
 
 def index(request):
-    return render(request, 'timer/index.html')
+    getV = Timer.objects.all()
+    context = {'getV':Timer.objects.all()}
+    return render(request, 'timer/index.html',context)
