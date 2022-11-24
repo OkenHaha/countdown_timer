@@ -63,12 +63,13 @@ class TimerView(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        d = datetime.now()
-        endT = d + timedelta(seconds=3)
-        set_time = Timer.objects.create(name="hi",start_time=d,end_time=endT)
+        #d = datetime.now()
+        #endT = d + timedelta(seconds=3)
+        #set_time = Timer.objects.create(name="hi",start_time=d,end_time=endT)
         
-        serializer = TimerSerializer(data=set_time)
+        serializer = TimerSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-        return Response("Posted successfully")
+            return Response("Posted successfully")
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

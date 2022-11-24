@@ -31,8 +31,7 @@ const [time, setTime] = useState(null)
 		})
 	}, [])
 
-//const nm = time.name	
-//setInterval(start, 1000);
+	
 	return (
 		<div>
 			{time?.map((time, index) => 
