@@ -1,10 +1,13 @@
-from django.shortcuts import render, redirect
-from rest_framework import viewsets
+from django.shortcuts import render
+from rest_framework import viewsets, status
 from rest_framework.views import APIView
-from .serializers import TimerSerializer
+from rest_framework.response import Response
+from .serializers import TimerSerializer, CreateTimeSerializer
 from .models import Timer
-
 # from datetime import datetime, timedelta
+# import time as tm
+
+from datetime import datetime, timedelta
 
 # d = datetime.timedelta(days =-1, seconds = 68400)
 # d = datetime.now()
@@ -31,15 +34,41 @@ from .models import Timer
 # setV = Timer.objects.create(rt=20)
 # setV.save()
 
-class TimerView(viewsets.ModelViewSet):
-    serializer_class = TimerSerializer
-    queryset = Timer.objects.all()
+# time_format = "%H:%M:%S"
+
+# def to_dt(dateTime):
+#     dateDT = datetime.strptime(dateTime, fr_data)   
+#     return dateDT
 
 
 
+# class TimerView(viewsets.ModelViewSet):
+#     serializer_class = TimerSerializer
+#     queryset = Timer.objects.all()
 
 
 def index(request):
-    getV = Timer.objects.all()
-    context = {'getV':Timer.objects.all()}
-    return render(request, 'timer/index.html',context)
+    return render(request, 'timer/index.html')
+
+
+# class TimerView(APIView):
+#     serializer_class = CreateTimeSerializer
+#     def post(self, request, format=None):
+#         pass
+
+class TimerView(APIView):
+    def get(self, request, pk=None, format=None):
+        queryset = Timer.objects.all()
+        serializer = TimerSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        d = datetime.now()
+        endT = d + timedelta(seconds=3)
+        set_time = Timer.objects.create(name="hi",start_time=d,end_time=endT)
+        
+        serializer = TimerSerializer(data=set_time)
+        if serializer.is_valid():
+            serializer.save()
+        return Response("Posted successfully")
+

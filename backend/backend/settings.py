@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'timer',
-    "countdowntimer_model",
     "crispy_forms"
 ]
 

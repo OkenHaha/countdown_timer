@@ -21,10 +21,11 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 
-router.register(r'timer', views.TimerView, 'timer')
+#router.register(r'timer', views.TimerView, 'timer')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('timer.urls')),
-    path('api/', include(router.urls))
+    #path('api/', include(router.urls)),
+    path('timerapi/', views.TimerView.as_view())
 ]

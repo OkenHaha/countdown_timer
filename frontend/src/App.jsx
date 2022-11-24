@@ -29,8 +29,24 @@ import Time from './pages/Time.jsx'
   );
 }*/
 function App() {
+const [date, setDate] = useState(new Date());
+  
+  function refreshClock() {
+    setDate(new Date());
+  }
+  useEffect(() => {
+    const timerId = setInterval(refreshClock, 1000);
+    return function cleanup() {
+      clearInterval(timerId);
+    };
+  }, []);
 
+  const show = () => {
+    const d = date.toLocaleTimeString()
+    return d;
+  }
   return (
+    <div>
     <Router>
       <div className="App">
       <button>
@@ -41,6 +57,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+    </div>
   );
 }
 
