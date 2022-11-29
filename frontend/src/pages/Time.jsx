@@ -21,32 +21,39 @@ const api = "http://127.0.0.1/timerapi/"
 const Time = () => {
 const [time, setTime] = useState(null)
 
-	useEffect(() => {
+	const get_date = () => { 
 		axios.get("http://127.0.0.1:8000/timerapi/")
 		.then((response) =>{
 			setTime(response.data)
 		})
 		.catch(err => {
-			//console.table(err)
+			console.table(err)
 		})
+	}
+	useEffect(() => {
+		const interval = setInterval(get_date, 1000)
+		return () => clearInterval(interval)
 	}, [])
 
-	
+ const endTime = new Date() + 3000;
+ const d = new Date()
+ 
 	return (
 		<div>
 			{time?.map((time, index) => 
 				<div key={index}>
-				{time.name} | {time.start_time} | {time.end_time}
+				{time.name} - | - {time.start_time} - | - {time.end_time} - | - {endTime}
 				<br/>
-				{typeof(time.start_time)}<br/>
-				{typeof(new Date(time.start_time))}<br/>
-				{typeof(new Date(time.end_time))}<br/>
-				{new Date(time.end_time) - new Date(time.start_time)}<br/>
+				{Math.floor(new Date(time.start_time))} - | - {Math.floor(new Date(time.end_time))}<br/>
+				{Math.floor(new Date(time.end_time) - new Date(time.start_time))}<br/>
 				{Math.floor(new Date(time.end_time) - new Date(time.start_time))/1000}<br/>
-				{setInterval(
-					Math.floor(new Date(time.end_time) - new Date(time.start_time))
-					,1000)}
-				{}
+				
+				{Math.floor(new Date(endTime))}<br/>
+				{d.getTime()}<br/>
+				{Math.floor(new Date(time.end_time) - d.getTime())}<br/>
+				{d.toLocaleString()}<br/>
+				{d.toTimeString()}<br/>
+				{new Date(time.start_time).getTime()}
 				</div>
 			)}
 			<h1>Hello</h1>

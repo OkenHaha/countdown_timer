@@ -29,7 +29,7 @@ import Time from './pages/Time.jsx'
   );
 }*/
 function App() {
-  const url = 'http://127.0.0.1:8000/timerapi'
+  const url = 'http://127.0.0.1:8000/timerapi/'
 
   const [ptime, setPtime] = useState(null)
 
@@ -38,21 +38,27 @@ function App() {
       'Content-Type': 'application/json',
     }
   }
-
+  const d = new Date()
+  const iso = d.toISOString()
+  console.log(iso)
+  const end = d.setMinutes(d.getMinutes() + 3)
+  //console.log(end)
+  const s = new Date(end)
+  console.log(s.toISOString())
   function setTime(){
     axios.post(url, {
       name: "oken",
-      start_time: new Date,
-      end_time: new Date + 10000
+      start_time: iso,
+      end_time: iso + 10000
     }, config)
     .then((response) => {
       setPtime(response.data)
     })
     .catch(err => {
       if (err.response) {
-        conosle.log(err.response.data)
-        conosle.log(err.response.status)
-        conosle.log(err.response.headers)
+        console.log(err.response.data)
+        console.log(err.response.status)
+        console.log(err.response.headers)
       }
       else if (err.request) {
         console.log(err.request)
@@ -83,7 +89,8 @@ function App() {
     <div>
     <Router>
       <div className="App">
-      <button onClick={setTime}>
+      <button onClick={setTime}>Post Date</button>
+      <button >
         <Link to="/timer">Start Timer</Link>
       </button>
       <Routes>

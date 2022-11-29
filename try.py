@@ -30,26 +30,31 @@ def to_HMS(dateTime):
 	dateHMS = datetime.strptime(dateTime, hms)
 	return dateHMS
 
-while True:
-	e = endT-datetime.now()
-	#print(e)
-	print(type(str(e)))
-	print(str(e).split('.')[0])
-	#print(e.split('.')[0])
-	#print(cd[8:])
-	# v = to_str(e)
-	# print(v)
-	#to_str(e)
-	#print(to_dt(v))
-	tm.sleep(1)
-	de = e
-	if e<timedelta(hours=0,minutes=0,seconds=1):
-		# s = str(e)
-		# print(to_str(s))
-		print("done")
-		break
-	cc = e 
+# while True:
+# 	e = endT-datetime.now()
+# 	#print(e)
+# 	print(type(str(e)))
+# 	print(str(e).split('.')[0])
+# 	#print(e.split('.')[0])
+# 	#print(cd[8:])
+# 	# v = to_str(e)
+# 	# print(v)
+# 	#to_str(e)
+# 	#print(to_dt(v))
+# 	tm.sleep(1)
+# 	de = e
+# 	if e<timedelta(hours=0,minutes=0,seconds=1):
+# 		# s = str(e)
+# 		# print(to_str(s))
+# 		print("done")
+# 		break
+# 	cc = e 
 
+
+# The below code converts the milliseconds into datetime
+# ms = 1669470770096
+# print(datetime.fromtimestamp(ms/1000.0))  #This is with the decimal point (milliseconds I suppose)
+# print(str(datetime.fromtimestamp(ms/1000.0)).split('.')[0])  #This is without milliseconds
 
 # dee = str(de).split('.')[0]
 # print(dee, type(dee))
